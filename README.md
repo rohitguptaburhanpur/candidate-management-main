@@ -1,3 +1,3 @@
-npm install
-npx prisma generate
-npx prisma migrate dev --name init
+Step 1: npm install
+Step 2: npx prisma generate
+Step 3: npx prisma migrate dev --name init
