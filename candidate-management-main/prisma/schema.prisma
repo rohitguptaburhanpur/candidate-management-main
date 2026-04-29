@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  password  String
+  email     String   @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  candidates Candidate[]
+}
+
+model Candidate {
+  id           Int      @id @default(autoincrement())
+  userName     String
+  email        String
+  primarySkill String
+  experience   Float    // Experience in years
+  score        Int      // Score out of 100
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  
+  userId Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
